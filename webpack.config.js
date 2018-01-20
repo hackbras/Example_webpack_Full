@@ -5,23 +5,34 @@ module.exports = {
     entry: './src/app.js',
     output: {
         path: __dirname + '/dist',
-        filename: 'index.bundle.js'
+        filename: '[name].bundle.js'
     },
     module: {
         rules: [{
-            test: /\.sass/,
-            //use: ExtractTextPlugin.extract(['style-loader', 'css-loader', 'sass-loader'])
-            use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: ['css-loader', 'sass-loader'],
-                publicPath: "/dist"
-            })
-        }]
+                test: /\.pug$/,
+                use: ['html-loader', 'pug-html-loader']
+            },
+            {
+                test: /\.sass/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader'],
+                    publicPath: __dirname + "/dist"
+                })
+            },
+            {
+                test: /.jsx?$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
+            }
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Project Demo',
-            template: './src/index.html'
+            template: './src/index.pug'
         }),
         new ExtractTextPlugin({
             filename: 'bundle.css',
