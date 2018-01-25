@@ -1,1 +1,3 @@
-# Example_webpack_with_WebPackDevServer
+# LearningWebpack2
+**Command Start**
+*npm run dev

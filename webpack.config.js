@@ -9,6 +9,13 @@ module.exports = {
     },
     module: {
         rules: [{
+                test: /.jsx?$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
+            },
+            {
                 test: /\.pug$/,
                 use: ['html-loader', 'pug-html-loader']
             },
@@ -17,15 +24,8 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader'],
-                    publicPath: __dirname + "/dist"
+                    publicPath: "/dist"
                 })
-            },
-            {
-                test: /.jsx?$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015']
-                }
             }
         ],
     },
